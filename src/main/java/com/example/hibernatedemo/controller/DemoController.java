@@ -22,4 +22,14 @@ public class DemoController {
     public List<Person> getPersonsByCity(@RequestParam(required = false) String city) {
         return service.getPersonsByCity(city);
     }
+
+    @GetMapping("/persons/by-age-less")
+    public List<Person> getPersonsByAgeLessThan(@RequestParam(required = false) int age) {
+        return service.getPersonsByAgeLessThan(age);
+    }
+
+    @GetMapping("/persons/by-name-surname")
+    public List<Person> ggetPersonsByNameAndSurname(@RequestParam(required = false) String name, String surname) {
+        return service.getPersonsByNameAndSurname(name, surname);
+    }
 }
