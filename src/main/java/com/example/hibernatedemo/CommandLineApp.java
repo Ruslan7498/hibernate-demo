@@ -1,12 +1,12 @@
 package com.example.hibernatedemo;
 
 import com.example.hibernatedemo.entity.Person;
+import com.example.hibernatedemo.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -21,8 +21,12 @@ public class CommandLineApp implements CommandLineRunner {
     public static final int AGE = 60;
     public static final Random random = new Random();
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final PersonRepository personRepository;
+
+    @Autowired
+    public CommandLineApp(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
     @Override
     @Transactional
@@ -36,7 +40,7 @@ public class CommandLineApp implements CommandLineRunner {
                             .city(CITYS.get(random.nextInt(NAMES.size())))
                             .phoneNumber(UNKNOWN)
                             .build();
-                    entityManager.persist(person);
+                    personRepository.save(person);
                 });
     }
 }

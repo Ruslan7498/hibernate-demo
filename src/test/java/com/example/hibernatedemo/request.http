@@ -1,1 +1,7 @@
 GET localhost:8080/persons/by-city?city=Moscow
+
+###
+GET localhost:8080/persons/by-age-less?age=25
+
+###
+GET localhost:8080/persons/by-name-surname?name=Petr&surname=Konev
